@@ -23,17 +23,37 @@ const User = require("./models/user.js");
 
 const dbUrl= process.env.ATLASDB_URL;
 
-main()
-.then(()=>{
-    console.log("connected to DB");
-})
-.catch((err)=>{
-    console.log(err);
-});
+// main()
+// .then(()=>{
+//     console.log("connected to DB");
+// })
+// .catch((err)=>{
+//     console.log(err);
+// });
 
-async function main(){
-    await mongoose.connect(dbUrl);
+// async function main(){
+//     await mongoose.connect(dbUrl);
+// }
+
+// const dbUrl = process.env.ATLASDB_URL;
+
+async function main() {
+  await mongoose.connect(dbUrl, {
+    ssl: true,
+    tlsInsecure: true, // Not secure for production
+  });
 }
+
+main()
+  .then(() => {
+    console.log("connected to DB");
+  })
+  .catch((err) => {
+    console.log(err);
+  });
+
+
+
 
 app.set("view engine", "ejs");
 app.set( "views", path.join(__dirname, "views"));
