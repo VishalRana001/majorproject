@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>MajorProject</title>
+</head>
+<body>
+    <h1>Welcome to MajorProject!</h1>
+
+    <!-- Show success flash messages -->
+    <% if (success) { %>
+        <p style="color:green;"><%= success %></p>
+    <% } %>
+
+    <!-- Show error flash messages -->
+    <% if (error) { %>
+        <p style="color:red;"><%= error %></p>
+    <% } %>
+
+    <!-- Show current logged-in user -->
+    <% if (currUser) { %>
+        <p>Logged in as: <%= currUser.username %></p>
+    <% } else { %>
+        <p>You are not logged in.</p>
+    <% } %>
+</body>
+</html>

@@ -64,7 +64,7 @@ app.use(express.static(path.join(__dirname, "/public")));
 
 const store =MongoStore.create({
     mongoUrl:dbUrl, 
-    cryoto: {
+    crypto: {
        secret: process.env.SECRET,
     },
     touchAfter: 24* 3600,
@@ -123,6 +123,10 @@ app.use((req, res, next)=>{
 app.use("/listings", listingRouter); 
 app.use("/listings/:id/reviews", reviewRouter);
 app.use("/", userRouter);
+app.get("/", (req, res) => {
+    res.render("home"); // Make sure you have views/home.ejs
+});
+
 
 //  app.all("*", (req, res, next)=>{
 //     next(new ExpressError(404, "Page Not Found!"));
@@ -133,6 +137,13 @@ app.use("/", userRouter);
 
 // }); 
 
-app.listen(8080, ()=>{
-    console.log("server is listening to port 8080");
+const PORT = process.env.PORT || 8080;
+
+app.listen(PORT, () => {
+    console.log(`Server running on port ${PORT}`);
 });
+
+
+// app.listen(8080, ()=>{
+//     console.log("server is listening to port 8080");
+// });
